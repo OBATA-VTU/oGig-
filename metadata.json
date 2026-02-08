@@ -1,0 +1,8 @@
+{
+  "name": "oGig - The Gig & Service Nexus",
+  "description": "A modern platform for connecting job seekers with gigs and services, featuring AI-powered job categorization for administrators.",
+  "requestFramePermissions": [
+    "camera",
+    "microphone"
+  ]
+}
