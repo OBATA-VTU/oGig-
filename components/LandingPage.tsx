@@ -1,6 +1,10 @@
 
 import React from 'react';
-import { ArrowRight, Sparkles, Users, Zap, ShieldCheck, MapPin, Search, Globe, ChevronRight, CheckCircle2, TrendingUp, Handshake, Target, Briefcase, Star, MessageSquare } from 'lucide-react';
+import { 
+  ArrowRight, Zap, ShieldCheck, Search, CheckCircle2, 
+  TrendingUp, Star, MessageSquare, Briefcase, Globe,
+  Rocket, Users, Shield, Award
+} from 'lucide-react';
 
 interface LandingPageProps {
   onExplore: () => void;
@@ -8,184 +12,207 @@ interface LandingPageProps {
 
 const LandingPage: React.FC<LandingPageProps> = ({ onExplore }) => {
   return (
-    <div className="animate-in fade-in duration-1000">
+    <div className="space-y-0 overflow-hidden">
       {/* Hero Section */}
-      <section className="relative pt-24 pb-40 overflow-hidden bg-white">
-        <div className="absolute top-0 right-0 -z-10 w-[1200px] h-[1200px] bg-indigo-50/40 rounded-full blur-[140px] -translate-y-1/2 translate-x-1/3"></div>
-        <div className="absolute bottom-0 left-0 -z-10 w-[800px] h-[800px] bg-purple-50/30 rounded-full blur-[120px] translate-y-1/3 -translate-x-1/3"></div>
+      <section className="relative min-h-[85vh] flex items-center pt-20">
+        <div className="absolute inset-0 z-[-1]">
+          <div className="absolute top-10 left-10 w-72 h-72 bg-indigo-500/10 rounded-full blur-3xl dark:bg-indigo-900/20"></div>
+          <div className="absolute bottom-10 right-10 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl dark:bg-purple-900/20"></div>
+        </div>
         
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-24 items-center">
-            <div className="space-y-14 text-center lg:text-left">
-              <div className="inline-flex items-center gap-4 px-6 py-3 bg-slate-900 rounded-full shadow-2xl shadow-slate-200">
-                <span className="flex h-3 w-3">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-                  <span className="relative inline-flex rounded-full h-3 w-3 bg-emerald-500"></span>
-                </span>
-                <span className="text-xs font-black text-white uppercase tracking-[0.2em]">Nigeria's Premium Job Network</span>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+            <div className="space-y-8 text-center lg:text-left animate-fade-up">
+              <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-indigo-50 dark:bg-indigo-950 text-indigo-600 dark:text-indigo-400 rounded-full font-bold text-xs uppercase tracking-widest">
+                <Star className="w-3.5 h-3.5 fill-current" />
+                Empowering Local Talent
               </div>
               
-              <h1 className="text-7xl md:text-9xl font-black text-slate-900 leading-[0.85] tracking-tighter">
-                Better Gigs.<br />
-                <span className="text-indigo-600">Pure Hustle.</span><br />
-                Total Freedom.
+              <h1 className="text-5xl md:text-7xl font-black text-slate-900 dark:text-white leading-[1.1] tracking-tight">
+                Connect With <br />
+                <span className="text-indigo-600">Great Gigs.</span>
               </h1>
               
-              <p className="text-2xl text-slate-500 max-w-xl mx-auto lg:mx-0 leading-relaxed font-semibold">
-                Verified opportunities for the Nigerian spirit. Connect directly with clients. No middleman, no stress.
+              <p className="text-lg md:text-xl text-slate-600 dark:text-slate-400 max-w-xl mx-auto lg:mx-0 font-medium leading-relaxed">
+                oGig is a simple platform dedicated to helping Nigerians find meaningful work and reliable services. Start your next project today.
               </p>
 
-              <div className="flex flex-col sm:flex-row items-center gap-8 justify-center lg:justify-start">
+              <div className="flex flex-col sm:flex-row items-center gap-4 justify-center lg:justify-start">
                 <button 
                   onClick={onExplore}
-                  className="group px-14 py-7 bg-slate-900 text-white rounded-[40px] font-black text-2xl flex items-center gap-5 hover:bg-indigo-600 transition-all shadow-[0_30px_60px_-15px_rgba(0,0,0,0.3)] hover:shadow-[0_30px_60px_-15px_rgba(79,70,229,0.4)] active:scale-95"
+                  className="w-full sm:w-auto px-10 py-4 bg-slate-900 dark:bg-indigo-600 text-white rounded-2xl font-black text-lg flex items-center justify-center gap-3 hover:scale-105 transition-all shadow-xl active:scale-95"
                 >
-                  Explore Now
-                  <ArrowRight className="w-8 h-8 group-hover:translate-x-2 transition-transform" />
+                  Explore Gigs
+                  <ArrowRight className="w-5 h-5" />
                 </button>
-                <div className="flex flex-col items-center lg:items-start gap-2">
-                  <div className="flex -space-x-4">
-                    {[1, 2, 3, 4, 5].map((i) => (
-                      <img key={i} src={`https://api.dicebear.com/7.x/avataaars/svg?seed=user-${i}`} className="w-14 h-14 rounded-[20px] border-4 border-white shadow-xl" alt="Active User" />
-                    ))}
-                  </div>
-                  <p className="font-black text-slate-400 text-xs uppercase tracking-widest">Join 12,000+ Verified Hustlers</p>
-                </div>
-              </div>
-            </div>
-
-            <div className="relative">
-              <div className="relative z-10 rounded-[80px] overflow-hidden shadow-[0_50px_100px_-20px_rgba(0,0,0,0.2)] border-[16px] border-white transform lg:-rotate-2 hover:rotate-0 transition-transform duration-700">
-                <img 
-                  src="https://images.pexels.com/photos/1181263/pexels-photo-1181263.jpeg?auto=compress&cs=tinysrgb&w=800" 
-                  alt="Productivity" 
-                  className="w-full h-auto object-cover aspect-[4/5]"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-transparent to-transparent"></div>
-                <div className="absolute bottom-16 left-16 right-16 text-white">
-                  <div className="bg-white/20 backdrop-blur-md p-6 rounded-[32px] border border-white/20">
-                    <h4 className="text-3xl font-black tracking-tight mb-2">Social Media Specialist</h4>
-                    <p className="font-black text-indigo-400 text-sm uppercase tracking-widest">Lagos • ₦250k / Month</p>
-                  </div>
-                </div>
+                <button 
+                  onClick={() => window.location.hash = 'post'}
+                  className="w-full sm:w-auto px-10 py-4 bg-white dark:bg-slate-900 dark:text-white text-slate-900 border-2 border-slate-900 dark:border-slate-700 rounded-2xl font-black text-lg hover:bg-slate-50 dark:hover:bg-slate-800 transition-all"
+                >
+                  Post a Job
+                </button>
               </div>
               
-              <div className="absolute -top-12 -right-12 z-20 bg-indigo-600 p-10 rounded-[48px] shadow-3xl animate-bounce-slow">
-                <Star className="w-12 h-12 text-white fill-white" />
+              <div className="flex items-center gap-4 justify-center lg:justify-start pt-4">
+                <div className="flex -space-x-2">
+                  {[1, 2, 3].map(i => (
+                    <img key={i} src={`https://api.dicebear.com/7.x/avataaars/svg?seed=user${i}`} className="w-10 h-10 rounded-full border-2 border-white dark:border-slate-900" alt="User" />
+                  ))}
+                </div>
+                <p className="text-sm text-slate-500 dark:text-slate-400 font-bold">Trusted by 500+ active workers</p>
               </div>
             </div>
-          </div>
-        </div>
-      </section>
 
-      {/* Categories Grid */}
-      <section className="py-40 bg-slate-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col md:flex-row justify-between items-end gap-12 mb-24">
-            <div className="max-w-2xl space-y-6">
-              <h2 className="text-6xl font-black text-slate-900 tracking-tighter">Choose Your Path</h2>
-              <p className="text-2xl text-slate-500 font-bold leading-relaxed">From tech giants to local home services, oGig covers it all.</p>
-            </div>
-            <div className="bg-white px-8 py-5 rounded-3xl border border-slate-200 flex items-center gap-4">
-              <TrendingUp className="w-8 h-8 text-indigo-600" />
-              <div>
-                <p className="text-3xl font-black text-slate-900 tracking-tighter">800+</p>
-                <p className="text-xs font-black text-slate-400 uppercase tracking-widest">Gigs Added This Week</p>
+            <div className="relative animate-fade-up hidden lg:block" style={{ animationDelay: '0.2s' }}>
+              <div className="relative z-10 rounded-3xl overflow-hidden shadow-2xl animate-float">
+                <img 
+                  src="https://images.unsplash.com/photo-1521737711867-e3b97375f902?auto=format&fit=crop&q=80&w=1000" 
+                  alt="Team working" 
+                  className="w-full h-auto object-cover aspect-[4/3]"
+                />
               </div>
-            </div>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
-            <ModernCategoryCard title="Tech & Dev" img="https://images.pexels.com/photos/3183158/pexels-photo-3183158.jpeg?auto=compress&cs=tinysrgb&w=800" count="210" color="bg-blue-500" />
-            <ModernCategoryCard title="Logistics" img="https://images.pexels.com/photos/6169033/pexels-photo-6169033.jpeg?auto=compress&cs=tinysrgb&w=800" count="450" color="bg-emerald-500" />
-            <ModernCategoryCard title="Home Services" img="https://images.pexels.com/photos/4099467/pexels-photo-4099467.jpeg?auto=compress&cs=tinysrgb&w=800" count="820" color="bg-amber-500" />
-            <ModernCategoryCard title="Writing" img="https://images.pexels.com/photos/3184639/pexels-photo-3184639.jpeg?auto=compress&cs=tinysrgb&w=800" count="180" color="bg-rose-500" />
-            <ModernCategoryCard title="Marketing" img="https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg?auto=compress&cs=tinysrgb&w=800" count="140" color="bg-indigo-500" />
-            <ModernCategoryCard title="Healthcare" img="https://images.pexels.com/photos/3786157/pexels-photo-3786157.jpeg?auto=compress&cs=tinysrgb&w=800" count="95" color="bg-teal-500" />
-          </div>
-        </div>
-      </section>
-
-      {/* Trust & Verification Section */}
-      <section className="py-40 bg-white relative overflow-hidden">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="bg-slate-900 rounded-[100px] p-20 md:p-32 text-white relative overflow-hidden">
-            <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-indigo-600/20 rounded-full blur-[120px] -translate-y-1/2 translate-x-1/2"></div>
-            <div className="relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-24 items-center">
-              <div className="space-y-12">
-                <h2 className="text-6xl md:text-8xl font-black tracking-tighter leading-none">Security Built In.</h2>
-                <p className="text-2xl text-slate-400 font-medium leading-relaxed">We protect your hustle. Every gig marked with the oGig seal is verified by our specialist team.</p>
-                <div className="grid grid-cols-1 gap-8">
-                  <TrustFeature icon={<ShieldCheck />} title="Vetted Employers" text="We audit every partner project for safety and fair pay." />
-                  <TrustFeature icon={<Zap />} title="Direct Contact" text="Call or WhatsApp clients instantly with zero fees." />
-                  <TrustFeature icon={<MessageSquare />} title="Real Support" text="Our Lagos-based support team is always active." />
+              <div className="absolute -bottom-6 -left-6 z-20 bg-white dark:bg-slate-800 p-6 rounded-2xl shadow-xl border border-slate-100 dark:border-slate-700">
+                <div className="flex items-center gap-3">
+                  <div className="p-2 bg-emerald-50 dark:bg-emerald-900/30 rounded-xl">
+                    <CheckCircle2 className="w-6 h-6 text-emerald-600" />
+                  </div>
+                  <div>
+                    <p className="text-xl font-black dark:text-white tracking-tighter">Verified</p>
+                    <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">100% Secure Posts</p>
+                  </div>
                 </div>
               </div>
-              <div className="bg-white/5 backdrop-blur-2xl p-16 rounded-[80px] border border-white/10 text-center">
-                <div className="bg-indigo-600 w-24 h-24 rounded-[32px] flex items-center justify-center mx-auto mb-10 shadow-2xl">
-                  <Globe className="w-12 h-12 text-white" />
-                </div>
-                <h3 className="text-4xl font-black mb-6">Nigeria's Trust Network</h3>
-                <p className="text-slate-400 text-xl font-medium mb-12 leading-relaxed">The only platform that understands the local landscape perfectly.</p>
-                <button onClick={onExplore} className="w-full py-7 bg-white text-slate-900 rounded-[40px] font-black text-2xl hover:bg-indigo-50 transition-all shadow-2xl">Start Searching</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Features Section */}
+      <section className="py-24 bg-slate-50 dark:bg-slate-900/30">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center max-w-3xl mx-auto mb-16 space-y-4">
+            <h2 className="text-4xl font-black dark:text-white tracking-tight">Built for Reliability</h2>
+            <p className="text-lg text-slate-500 dark:text-slate-400 font-medium">Simple tools to bridge the gap between skill and opportunity.</p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <FeatureCard 
+              icon={<Shield className="w-8 h-8" />}
+              title="Secure Connections"
+              desc="We verify employers and service providers to ensure a safe workspace for everyone."
+            />
+            <FeatureCard 
+              icon={<Zap className="w-8 h-8" />}
+              title="Instant Updates"
+              desc="Real-time notifications for the latest gigs in your location and category."
+            />
+            <FeatureCard 
+              icon={<Award className="w-8 h-8" />}
+              title="Verified Talent"
+              desc="Showcase your skills with a professional profile that employers can trust."
+            />
+          </div>
+        </div>
+      </section>
+
+      {/* How it Works Section */}
+      <section className="py-24">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+            <div className="space-y-8">
+              <h2 className="text-4xl font-black dark:text-white tracking-tight">Getting Started is Easy</h2>
+              <div className="space-y-8">
+                <Step num="01" title="Create a Profile" desc="Set up your account in minutes. Add your skills and preferred job types." />
+                <Step num="02" title="Browse Open Gigs" desc="Use our advanced search to find work that fits your schedule and rate." />
+                <Step num="03" title="Apply & Connect" desc="Contact employers directly through our secure messaging or provided links." />
+              </div>
+            </div>
+            <div className="bg-slate-900 dark:bg-indigo-950 p-12 rounded-[40px] text-white space-y-8">
+              <h3 className="text-3xl font-black">Why oGig?</h3>
+              <p className="text-slate-400 font-medium leading-relaxed">
+                oGig was created by OBA with a simple goal: to help the hardworking Nigerian community find gigs without the hassle of complex corporate portals.
+              </p>
+              <ul className="space-y-4">
+                <li className="flex items-center gap-3"><CheckCircle2 className="w-5 h-5 text-indigo-400" /> No hidden service fees</li>
+                <li className="flex items-center gap-3"><CheckCircle2 className="w-5 h-5 text-indigo-400" /> Direct communication with hirers</li>
+                <li className="flex items-center gap-3"><CheckCircle2 className="w-5 h-5 text-indigo-400" /> Mobile-first user experience</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Categories Spotlight */}
+      <section className="py-24 bg-slate-50 dark:bg-slate-900/30">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-12">
+          <h2 className="text-4xl font-black dark:text-white tracking-tight">Popular Service Categories</h2>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            {['Logistics', 'Web Design', 'Construction', 'Cleaning', 'Marketing', 'Writing', 'Repair', 'Tailoring'].map(cat => (
+              <div key={cat} className="p-6 bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-700 hover:border-indigo-500 transition-all cursor-pointer">
+                <p className="font-bold dark:text-white">{cat}</p>
+              </div>
+            ))}
+          </div>
+          <button onClick={onExplore} className="text-indigo-600 dark:text-indigo-400 font-black flex items-center gap-2 mx-auto hover:gap-4 transition-all">
+            See All Gigs <ArrowRight className="w-5 h-5" />
+          </button>
+        </div>
+      </section>
+
+      {/* Trust & Safety Section */}
+      <section className="py-24 bg-white dark:bg-slate-950">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="bg-indigo-600 dark:bg-indigo-700 rounded-[48px] p-12 md:p-20 text-white relative overflow-hidden">
+            <div className="absolute top-0 right-0 w-96 h-96 bg-white/10 rounded-full -translate-y-1/2 translate-x-1/2"></div>
+            <div className="relative z-10 max-w-2xl space-y-8">
+              <ShieldCheck className="w-16 h-16" />
+              <h2 className="text-4xl md:text-5xl font-black leading-tight tracking-tight">Your Safety is Our Top Priority.</h2>
+              <p className="text-xl text-indigo-100 font-medium">
+                We implement strict security measures to protect users from scams and low-quality posts. Every gig on oGig is manually reviewed or posted by trusted community members.
+              </p>
+              <div className="flex flex-wrap gap-4 pt-4">
+                <button onClick={() => window.location.hash = 'safety'} className="px-8 py-3 bg-white text-indigo-600 rounded-xl font-black text-sm hover:scale-105 transition-all">Safety Tips</button>
+                <button onClick={() => window.location.hash = 'privacy'} className="px-8 py-3 bg-indigo-500 text-white border border-indigo-400 rounded-xl font-black text-sm">Privacy Shield</button>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* FAQ / Final CTA */}
-      <section className="py-40 bg-white">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-20">
-          <div className="space-y-6">
-            <h2 className="text-6xl font-black text-slate-900 tracking-tighter">Ready to earn?</h2>
-            <p className="text-2xl text-slate-500 font-bold leading-relaxed">Join the thousands of Nigerians who find their next paycheck on oGig every single day.</p>
-          </div>
-          
-          <div className="flex flex-col md:flex-row gap-8 justify-center">
-            <button onClick={onExplore} className="px-14 py-7 bg-slate-900 text-white rounded-[40px] font-black text-2xl shadow-3xl hover:bg-indigo-600 transition-all">Browse Gigs Now</button>
-            <button onClick={() => window.location.hash = 'post'} className="px-14 py-7 bg-white border-4 border-slate-900 text-slate-900 rounded-[40px] font-black text-2xl hover:bg-slate-50 transition-all">Post a Gig</button>
-          </div>
-
-          <div className="pt-20 border-t border-slate-100 flex flex-wrap justify-center gap-x-16 gap-y-10">
-            <StatSmall label="Active Gigs" value="2.5k+" />
-            <StatSmall label="Monthly Earners" value="10k+" />
-            <StatSmall label="Verified Partners" value="150+" />
-          </div>
+      {/* CTA Section */}
+      <section className="py-32 text-center space-y-10">
+        <h2 className="text-5xl font-black dark:text-white tracking-tighter">Ready to Work?</h2>
+        <p className="text-xl text-slate-500 dark:text-slate-400 font-medium max-w-2xl mx-auto">
+          Join the community today and unlock a world of professional opportunities tailored for the Nigerian market.
+        </p>
+        <div className="pt-6">
+          <button 
+            onClick={onExplore}
+            className="px-16 py-6 bg-slate-900 dark:bg-indigo-600 text-white rounded-[24px] font-black text-2xl shadow-2xl hover:scale-105 transition-all"
+          >
+            Start Earning Now
+          </button>
         </div>
       </section>
     </div>
   );
 };
 
-const ModernCategoryCard = ({ title, img, count, color }: { title: string, img: string, count: string, color: string }) => (
-  <div className="group relative h-[450px] rounded-[60px] overflow-hidden shadow-2xl cursor-pointer">
-    <img src={img} className="absolute inset-0 w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110" alt={title} />
-    <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/40 to-transparent"></div>
-    <div className="absolute top-10 right-10">
-      <div className={`${color} px-6 py-2 rounded-2xl text-white font-black text-xs uppercase tracking-widest shadow-xl`}>{count} Live</div>
-    </div>
-    <div className="absolute bottom-12 left-12 right-12 space-y-4">
-      <h3 className="text-4xl font-black text-white tracking-tight">{title}</h3>
-      <div className="h-2 w-12 bg-indigo-500 rounded-full group-hover:w-24 transition-all duration-500"></div>
-    </div>
+const FeatureCard = ({ icon, title, desc }: any) => (
+  <div className="p-8 bg-white dark:bg-slate-900 rounded-3xl border border-slate-100 dark:border-slate-800 shadow-sm hover:shadow-lg transition-all">
+    <div className="text-indigo-600 dark:text-indigo-400 mb-6">{icon}</div>
+    <h3 className="text-xl font-black mb-3 dark:text-white">{title}</h3>
+    <p className="text-slate-500 dark:text-slate-400 font-medium text-sm leading-relaxed">{desc}</p>
   </div>
 );
 
-const TrustFeature = ({ icon, title, text }: { icon: React.ReactNode, title: string, text: string }) => (
-  <div className="flex gap-8 items-start group">
-    <div className="p-5 bg-white/10 rounded-[28px] group-hover:bg-indigo-600 transition-colors">{React.cloneElement(icon as React.ReactElement, { className: 'w-8 h-8 text-white' })}</div>
+const Step = ({ num, title, desc }: any) => (
+  <div className="flex gap-6">
+    <div className="text-3xl font-black text-indigo-600/20 tabular-nums">{num}</div>
     <div>
-      <h4 className="text-2xl font-black text-white tracking-tight mb-2">{title}</h4>
-      <p className="text-lg text-slate-400 font-medium leading-snug">{text}</p>
+      <h4 className="text-xl font-black mb-2 dark:text-white">{title}</h4>
+      <p className="text-slate-500 dark:text-slate-400 font-medium leading-relaxed">{desc}</p>
     </div>
-  </div>
-);
-
-const StatSmall = ({ label, value }: { label: string, value: string }) => (
-  <div className="text-center">
-    <p className="text-4xl font-black text-slate-900 tracking-tighter mb-1">{value}</p>
-    <p className="text-xs font-black text-slate-400 uppercase tracking-widest">{label}</p>
   </div>
 );
 
