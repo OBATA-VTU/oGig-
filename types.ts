@@ -7,6 +7,25 @@ export enum JobType {
   SERVICE = 'Service'
 }
 
+export enum UserRole {
+  EMPLOYEE = 'employee',
+  EMPLOYER = 'employer',
+  ADMIN = 'admin'
+}
+
+export interface UserProfile {
+  uid: string;
+  email: string;
+  role: UserRole;
+  displayName?: string;
+  // Employer specific fields
+  businessName?: string;
+  businessAddress?: string;
+  isLegallyRegistered?: boolean;
+  contactPhone?: string;
+  createdAt: string;
+}
+
 export interface Job {
   id: string;
   title: string;

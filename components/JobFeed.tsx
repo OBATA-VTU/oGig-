@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import JobCard from './JobCard';
 import { storageService } from '../services/storageService';
 import { Job } from '../types';
-import { Search, SlidersHorizontal, AlertCircle, Loader2, RefreshCcw } from 'lucide-react';
+import { Search, SlidersHorizontal, AlertCircle, Loader2, RefreshCcw, ShieldX } from 'lucide-react';
 
 const CATEGORIES = ['Development', 'Design', 'Marketing', 'Logistics', 'Home Services', 'Writing', 'Tech', 'Healthcare', 'Sales', 'Other'];
 const NIGERIAN_STATES = [
@@ -14,7 +14,7 @@ const NIGERIAN_STATES = [
 const JobFeed: React.FC = () => {
   const [jobs, setJobs] = useState<Job[]>([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(false);
+  const [error, setError] = useState<'network' | 'permission' | null>(null);
   const [searchQuery, setSearchQuery] = useState('');
   const [filterType, setFilterType] = useState<string>('all');
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
@@ -22,25 +22,25 @@ const JobFeed: React.FC = () => {
 
   useEffect(() => {
     setLoading(true);
-    // Safety timeout to show an error message if the feed takes too long (e.g. 6 seconds)
-    const timeout = setTimeout(() => {
-      if (loading) {
-        setLoading(false);
-        setError(true);
-      }
-    }, 6000);
+    setError(null);
 
-    const unsubscribe = storageService.subscribeToJobs((fetchedJobs) => {
-      setJobs(fetchedJobs);
-      setLoading(false);
-      setError(false);
-      clearTimeout(timeout);
-    });
+    const unsubscribe = storageService.subscribeToJobs(
+      (fetchedJobs) => {
+        setJobs(fetchedJobs);
+        setLoading(false);
+        setError(null);
+      },
+      (err) => {
+        setLoading(false);
+        if (err.code === 'permission-denied') {
+          setError('permission');
+        } else {
+          setError('network');
+        }
+      }
+    );
     
-    return () => {
-      unsubscribe();
-      clearTimeout(timeout);
-    };
+    return () => unsubscribe();
   }, []);
 
   const filteredJobs = jobs.filter(job => {
@@ -71,7 +71,22 @@ const JobFeed: React.FC = () => {
     );
   }
 
-  if (error && jobs.length === 0) {
+  if (error === 'permission') {
+    return (
+      <div className="flex flex-col items-center justify-center py-40 text-center px-4 animate-in zoom-in-95">
+        <div className="bg-amber-50 dark:bg-amber-900/20 p-6 rounded-[32px] mb-8">
+          <ShieldX className="w-12 h-12 text-amber-500" />
+        </div>
+        <h3 className="text-3xl font-black text-slate-900 dark:text-white tracking-tighter">Security Lockout</h3>
+        <p className="text-slate-500 dark:text-slate-400 mt-2 max-w-sm font-medium">Firestore permissions are currently denied. Please update your Security Rules in the Firebase Console to allow public reads for the 'jobs' collection.</p>
+        <div className="mt-8 p-4 bg-slate-900 rounded-xl text-left font-mono text-xs text-indigo-300">
+          allow read: if true;
+        </div>
+      </div>
+    );
+  }
+
+  if (error === 'network') {
     return (
       <div className="flex flex-col items-center justify-center py-40 text-center px-4 animate-in zoom-in-95">
         <div className="bg-rose-50 dark:bg-rose-900/20 p-6 rounded-[32px] mb-8">
