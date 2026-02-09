@@ -16,18 +16,42 @@
             sans: ['Plus Jakarta Sans', 'sans-serif'],
           },
           animation: {
-            'fade-up': 'fadeUp 0.5s ease-out forwards',
-            'float': 'float 3s ease-in-out infinite',
-            'bounce-slow': 'bounce 3s infinite',
+            'fade-up': 'fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards',
+            'fade-in': 'fadeIn 1s ease-out forwards',
+            'zoom-in': 'zoomIn 0.5s ease-out forwards',
+            'slide-left': 'slideLeft 0.8s ease-out forwards',
+            'slide-right': 'slideRight 0.8s ease-out forwards',
+            'float': 'float 4s ease-in-out infinite',
+            'marquee': 'marquee 30s linear infinite',
           },
           keyframes: {
             fadeUp: {
-              '0%': { opacity: '0', transform: 'translateY(20px)' },
+              '0%': { opacity: '0', transform: 'translateY(40px)' },
               '100%': { opacity: '1', transform: 'translateY(0)' },
+            },
+            fadeIn: {
+              '0%': { opacity: '0' },
+              '100%': { opacity: '1' },
+            },
+            zoomIn: {
+              '0%': { opacity: '0', transform: 'scale(0.95)' },
+              '100%': { opacity: '1', transform: 'scale(1)' },
+            },
+            slideLeft: {
+              '0%': { opacity: '0', transform: 'translateX(-40px)' },
+              '100%': { opacity: '1', transform: 'translateX(0)' },
+            },
+            slideRight: {
+              '0%': { opacity: '0', transform: 'translateX(40px)' },
+              '100%': { opacity: '1', transform: 'translateX(0)' },
             },
             float: {
               '0%, 100%': { transform: 'translateY(0)' },
-              '50%': { transform: 'translateY(-10px)' },
+              '50%': { transform: 'translateY(-20px)' },
+            },
+            marquee: {
+              '0%': { transform: 'translateX(0%)' },
+              '100%': { transform: 'translateX(-100%)' },
             }
           }
         }
@@ -36,24 +60,11 @@
   </script>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
-    
-    body {
-      transition: background-color 0.3s ease, color 0.3s ease;
-    }
-
-    .custom-scrollbar::-webkit-scrollbar {
-      width: 6px;
-    }
-    .custom-scrollbar::-webkit-scrollbar-track {
-      background: transparent;
-    }
-    .custom-scrollbar::-webkit-scrollbar-thumb {
-      background: #cbd5e1;
-      border-radius: 10px;
-    }
-    .dark .custom-scrollbar::-webkit-scrollbar-thumb {
-      background: #334155;
-    }
+    body { transition: background-color 0.3s ease, color 0.3s ease; }
+    .custom-scrollbar::-webkit-scrollbar { width: 6px; }
+    .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+    .custom-scrollbar::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
+    .dark .custom-scrollbar::-webkit-scrollbar-thumb { background: #334155; }
   </style>
 <script type="importmap">
 {
@@ -73,7 +84,7 @@
 }
 </script>
 </head>
-<body class="custom-scrollbar bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-100 antialiased">
+<body class="custom-scrollbar bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-100 antialiased overflow-x-hidden">
   <div id="root"></div>
   <script type="module" src="./index.tsx"></script>
 </body>
