@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { Loader2, CheckCircle2, Terminal, Database, Activity, Zap, Cpu, MessageCircle, Phone, Mail } from 'lucide-react';
 import { geminiService } from '../services/geminiService';
 import { storageService } from '../services/storageService';
+import { auth } from '../firebase/config';
 import { Job } from '../types';
 
 const AdminPanel: React.FC = () => {
@@ -25,11 +26,13 @@ const AdminPanel: React.FC = () => {
     
     try {
       const result = await geminiService.processJobContent(rawText);
+      // Fixed: Added creatorId which is required by the Job interface
       const newJob: Job = {
         ...result,
         id: Math.random().toString(36).substr(2, 9),
         postedAt: new Date().toISOString(),
         isAdminPosted: true,
+        creatorId: auth.currentUser?.uid || 'admin',
       };
       await storageService.saveJob(newJob);
       setStatus('success');

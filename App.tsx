@@ -7,14 +7,15 @@ import AdminPanel from './components/AdminPanel';
 import JobPostForm from './components/JobPostForm';
 import Dashboard from './components/Dashboard';
 import AboutPage from './components/AboutPage';
+import FounderPage from './components/FounderPage';
 import AuthModal from './components/AuthModal';
 import { auth, db } from './firebase/config';
 import { onAuthStateChanged, User } from 'firebase/auth';
 import { doc, getDoc } from 'firebase/firestore';
-import { Zap, ShieldAlert, Key, Lock } from 'lucide-react';
+import { Zap, ShieldAlert, Key, Lock, Loader2 } from 'lucide-react';
 import { UserRole, UserProfile } from './types';
 
-export type View = 'home' | 'gigs' | 'post' | 'admin' | 'about' | 'founder' | 'dashboard';
+export type View = 'home' | 'gigs' | 'post' | 'admin' | 'about' | 'founder' | 'dashboard' | 'auth';
 
 const App: React.FC = () => {
   const [currentView, setCurrentView] = useState<View>('home');
@@ -29,7 +30,9 @@ const App: React.FC = () => {
       setUser(u);
       if (u) {
         const snap = await getDoc(doc(db, 'users', u.uid));
-        if (snap.exists()) setProfile(snap.data() as UserProfile);
+        if (snap.exists()) {
+          setProfile(snap.data() as UserProfile);
+        }
       } else {
         setProfile(null);
       }
@@ -49,7 +52,7 @@ const App: React.FC = () => {
   useEffect(() => {
     const handleHashChange = () => {
       const hash = window.location.hash.replace('#', '');
-      const valid: View[] = ['home', 'gigs', 'post', 'admin', 'about', 'founder', 'dashboard'];
+      const valid: View[] = ['home', 'gigs', 'post', 'admin', 'about', 'founder', 'dashboard', 'auth'];
       if (hash === 'adminoba') setCurrentView('admin');
       else if (valid.includes(hash as View)) setCurrentView(hash as View);
       else setCurrentView('home');
@@ -66,18 +69,31 @@ const App: React.FC = () => {
     else window.location.hash = view;
   };
 
-  if (isLoading) return <div className="min-h-screen flex items-center justify-center bg-white dark:bg-slate-950"><Zap className="w-12 h-12 text-indigo-600 animate-spin" /></div>;
+  if (isLoading) return (
+    <div className="min-h-screen flex flex-col items-center justify-center bg-white dark:bg-slate-950">
+      <Loader2 className="w-12 h-12 text-indigo-600 animate-spin mb-4" />
+      <p className="text-slate-400 font-black uppercase tracking-widest text-[10px] animate-pulse">Initializing Nexus</p>
+    </div>
+  );
 
   const renderContent = () => {
     switch (currentView) {
       case 'home': return <LandingPage onExplore={() => navigate('gigs')} onPost={() => navigate('post')} />;
       case 'gigs': 
-        if (!user) return <AuthWall navigate={navigate} onAuthClick={() => setIsAuthModalOpen(true)} />;
+        if (!user) return <AuthWall onAuthClick={() => setIsAuthModalOpen(true)} />;
         return <JobFeed />;
-      case 'dashboard': return user ? <Dashboard /> : <AuthWall navigate={navigate} onAuthClick={() => setIsAuthModalOpen(true)} />;
-      case 'post': return user ? <JobPostForm onSuccess={() => navigate('gigs')} /> : <AuthWall navigate={navigate} onAuthClick={() => setIsAuthModalOpen(true)} />;
-      case 'about': return <AboutPage type="platform" />;
-      case 'founder': return <AboutPage type="founder" />;
+      case 'dashboard': 
+        if (!user) return <AuthWall onAuthClick={() => setIsAuthModalOpen(true)} />;
+        return <Dashboard profile={profile} />;
+      case 'post': 
+        if (!user) return <AuthWall onAuthClick={() => setIsAuthModalOpen(true)} />;
+        return <JobPostForm onSuccess={() => navigate('gigs')} />;
+      case 'about': return <AboutPage />;
+      case 'founder': return <FounderPage />;
+      case 'auth': 
+        setIsAuthModalOpen(true);
+        navigate('home');
+        return <LandingPage onExplore={() => navigate('gigs')} onPost={() => navigate('post')} />;
       case 'admin':
         if (profile?.role !== UserRole.ADMIN) return <AdminLock navigate={navigate} />;
         return <AdminPanel />;
@@ -86,28 +102,32 @@ const App: React.FC = () => {
   };
 
   return (
-    <Layout currentView={currentView} navigate={navigate} user={user} onAuthClick={() => setIsAuthModalOpen(true)} toggleTheme={toggleTheme} theme={theme}>
+    <Layout currentView={currentView} navigate={navigate} user={user} profile={profile} onAuthClick={() => setIsAuthModalOpen(true)} toggleTheme={toggleTheme} theme={theme}>
       {renderContent()}
       <AuthModal isOpen={isAuthModalOpen} onClose={() => setIsAuthModalOpen(false)} />
     </Layout>
   );
 };
 
-const AuthWall = ({ onAuthClick }: any) => (
+const AuthWall = ({ onAuthClick }: { onAuthClick: () => void }) => (
   <div className="max-w-md mx-auto py-40 text-center animate-fade-up">
-    <Lock className="w-20 h-20 text-indigo-600 mx-auto mb-8" />
+    <div className="bg-indigo-50 dark:bg-indigo-900/20 w-24 h-24 rounded-[40px] flex items-center justify-center mx-auto mb-8 shadow-inner border border-indigo-100 dark:border-indigo-800">
+      <Lock className="w-10 h-10 text-indigo-600" />
+    </div>
     <h2 className="text-4xl font-black mb-4 dark:text-white tracking-tighter">Nexus Restricted</h2>
-    <p className="text-xl text-slate-500 mb-10">You must be part of the professional ecosystem to access this sector.</p>
-    <button onClick={onAuthClick} className="w-full py-6 bg-slate-900 dark:bg-indigo-600 text-white rounded-[24px] font-black text-xl shadow-3xl">Connect to Nexus</button>
+    <p className="text-xl text-slate-500 mb-10">Access to the Gig board is limited to registered professionals. Connect to unlock opportunities.</p>
+    <button onClick={onAuthClick} className="w-full py-6 bg-slate-900 dark:bg-indigo-600 text-white rounded-[24px] font-black text-xl shadow-3xl hover:scale-105 transition-all active:scale-95">Connect to Nexus</button>
   </div>
 );
 
-const AdminLock = ({ navigate }: any) => (
+const AdminLock = ({ navigate }: { navigate: (v: View) => void }) => (
   <div className="max-w-md mx-auto py-40 text-center animate-fade-up">
-    <Key className="w-20 h-20 text-rose-500 mx-auto mb-8" />
-    <h2 className="text-4xl font-black mb-4 dark:text-white tracking-tighter">Forbidden Access</h2>
-    <p className="text-xl text-slate-500 mb-10">Your account does not have administrative clearance for this terminal.</p>
-    <button onClick={() => navigate('home')} className="w-full py-6 bg-slate-900 dark:bg-indigo-600 text-white rounded-[24px] font-black">Return to Home</button>
+    <div className="bg-rose-50 dark:bg-rose-900/20 w-24 h-24 rounded-[40px] flex items-center justify-center mx-auto mb-8 shadow-inner border border-rose-100 dark:border-rose-800">
+      <Key className="w-10 h-10 text-rose-500" />
+    </div>
+    <h2 className="text-4xl font-black mb-4 dark:text-white tracking-tighter">Forbidden Sector</h2>
+    <p className="text-xl text-slate-500 mb-10">Your account does not have administrative clearance for this terminal. Please return to the public nexus.</p>
+    <button onClick={() => navigate('home')} className="w-full py-6 bg-slate-900 dark:bg-indigo-600 text-white rounded-[24px] font-black text-xl hover:scale-105 transition-all">Return Home</button>
   </div>
 );
 

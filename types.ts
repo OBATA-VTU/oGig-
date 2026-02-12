@@ -13,6 +13,14 @@ export enum UserRole {
   ADMIN = 'ADMIN'
 }
 
+export interface PortfolioItem {
+  id: string;
+  title: string;
+  description: string;
+  imageUrl: string;
+  link?: string;
+}
+
 export interface UserProfile {
   uid: string;
   displayName: string;
@@ -21,7 +29,7 @@ export interface UserProfile {
   bio?: string;
   institution?: string; // e.g., AAUA
   skills: string[];
-  portfolioItems: { id: string; title: string; imageUrl: string }[];
+  portfolioItems: PortfolioItem[];
   following: string[]; // List of UIDs
   followers: string[]; // List of UIDs
   // Employer Specific
@@ -30,24 +38,6 @@ export interface UserProfile {
   isLegallyRegistered?: boolean;
   contactPhone?: string;
   createdAt: string;
-}
-
-// Added AIProcessedJob interface for structured data returned by GenAI
-export interface AIProcessedJob {
-  title: string;
-  company: string;
-  description: string;
-  requirements: string;
-  procedure: string;
-  location: string;
-  type: JobType;
-  category: string;
-  salary?: string;
-  tags: string[];
-  whatsapp?: string;
-  phone?: string;
-  email?: string;
-  link?: string;
 }
 
 export interface Job {
@@ -65,8 +55,24 @@ export interface Job {
   isAdminPosted: boolean;
   tags: string[];
   creatorId: string;
-  // Added optional fields used for branding and contact in the UI
   logo?: string;
+  whatsapp?: string;
+  phone?: string;
+  email?: string;
+  link?: string;
+}
+
+export interface AIProcessedJob {
+  title: string;
+  company: string;
+  description: string;
+  requirements: string;
+  procedure: string;
+  location: string;
+  type: JobType;
+  category: string;
+  salary?: string;
+  tags: string[];
   whatsapp?: string;
   phone?: string;
   email?: string;

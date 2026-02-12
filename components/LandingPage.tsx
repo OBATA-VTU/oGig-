@@ -2,7 +2,8 @@
 import React from 'react';
 import { 
   ArrowRight, Zap, Sparkles, Briefcase, Users, Globe, 
-  Target, Rocket, ShieldCheck, School, Building2, ChevronRight
+  Target, Rocket, ShieldCheck, School, Building2, ChevronRight,
+  TrendingUp, Award, CheckCircle
 } from 'lucide-react';
 
 interface LandingPageProps {
@@ -11,47 +12,66 @@ interface LandingPageProps {
 }
 
 const LandingPage: React.FC<LandingPageProps> = ({ onExplore, onPost }) => {
-  const logos = [
+  const corporateLogos = [
+    { name: 'Flutterwave', icon: <Zap className="text-indigo-500" /> },
+    { name: 'Dangote Group', icon: <Building2 className="text-green-600" /> },
+    { name: 'Google', icon: <Globe className="text-blue-500" /> },
+    { name: 'Microsoft', icon: <Target className="text-indigo-400" /> },
+    { name: 'Zenith Bank', icon: <ShieldCheck className="text-red-600" /> },
+    { name: 'Andela', icon: <Rocket className="text-indigo-700" /> },
+    { name: 'MTN Nigeria', icon: <Zap className="text-yellow-500" /> },
+    { name: 'Paystack', icon: <TrendingUp className="text-blue-600" /> },
+  ];
+
+  const universityLogos = [
     { name: 'AAUA', icon: <School className="text-orange-500" /> },
-    { name: 'Flutterwave', icon: <Zap className="text-blue-500" /> },
-    { name: 'Dangote', icon: <Building2 className="text-green-600" /> },
-    { name: 'Google', icon: <Globe className="text-red-500" /> },
-    { name: 'UNILAG', icon: <School className="text-maroon-500" /> },
-    { name: 'Microsoft', icon: <Target className="text-blue-400" /> },
-    { name: 'Zenith', icon: <ShieldCheck className="text-red-600" /> },
-    { name: 'UI', icon: <School className="text-blue-900" /> }
+    { name: 'UNILAG', icon: <School className="text-blue-900" /> },
+    { name: 'University of Ibadan', icon: <School className="text-indigo-900" /> },
+    { name: 'OAU', icon: <School className="text-blue-500" /> },
+    { name: 'UNN', icon: <School className="text-green-800" /> },
+    { name: 'Covenant Uni', icon: <School className="text-indigo-600" /> },
   ];
 
   return (
     <div className="space-y-0 overflow-hidden bg-white dark:bg-slate-950">
-      {/* 1. HERO IMAGE (ABOVE HEADLINE) */}
-      <section className="relative pt-12 animate-fade-in">
+      {/* 1. HERO VISUAL (ABOVE TEXT) */}
+      <section className="relative pt-10 animate-fade-in">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="relative rounded-[60px] overflow-hidden shadow-[0_50px_100px_-20px_rgba(0,0,0,0.3)] border-[12px] border-white dark:border-slate-900 group h-[400px] md:h-[600px]">
+          <div className="relative rounded-[60px] overflow-hidden shadow-[0_50px_100px_-20px_rgba(0,0,0,0.3)] border-[12px] border-white dark:border-slate-900 group h-[400px] md:h-[650px]">
             <img 
               src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&q=80&w=2000" 
-              alt="High Performance Team" 
-              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-[5s]"
+              alt="Nigerian Talent Workforce" 
+              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-[8s]"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent"></div>
-            <div className="absolute bottom-12 left-12 animate-fade-up">
-              <div className="px-6 py-2 bg-indigo-600 text-white rounded-full font-black text-xs uppercase tracking-widest shadow-2xl">
-                Nigeria's Verified Nexus
+            <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/20 to-transparent"></div>
+            <div className="absolute bottom-12 left-12 right-12 flex flex-col md:flex-row justify-between items-end gap-8">
+              <div className="animate-fade-up">
+                <div className="px-6 py-2 bg-indigo-600 text-white rounded-full font-black text-[10px] uppercase tracking-[0.3em] shadow-2xl inline-block mb-4">
+                  Nigeria's Premium Talent Nexus
+                </div>
+                <h1 className="text-5xl md:text-8xl font-black text-white leading-[0.9] tracking-tighter">
+                  Find Talent.<br />
+                  <span className="text-indigo-500 italic">Claim Gigs.</span>
+                </h1>
+              </div>
+              <div className="flex -space-x-4 animate-fade-up" style={{ animationDelay: '0.4s' }}>
+                {[1, 2, 3, 4].map(i => (
+                  <div key={i} className="w-16 h-16 rounded-full border-4 border-slate-900 bg-slate-800 overflow-hidden shadow-2xl">
+                    <img src={`https://api.dicebear.com/7.x/avataaars/svg?seed=user${i}`} alt="User" />
+                  </div>
+                ))}
+                <div className="w-16 h-16 rounded-full border-4 border-slate-900 bg-indigo-600 flex items-center justify-center text-white text-xs font-black shadow-2xl">+5k</div>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* 2. HERO HEADLINE */}
-      <section className="relative pt-20 pb-40">
+      {/* 2. SUB-HERO DESCRIPTION & CTA */}
+      <section className="relative pt-24 pb-40">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center animate-fade-up" style={{ animationDelay: '0.2s' }}>
-          <h1 className="text-6xl md:text-[9rem] font-black text-slate-900 dark:text-white leading-[0.8] tracking-tighter mb-12">
-            Find Talent.<br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 via-purple-600 to-indigo-600">Claim Gigs.</span>
-          </h1>
           <p className="text-2xl md:text-3xl text-slate-500 dark:text-slate-400 max-w-3xl mx-auto font-medium leading-relaxed mb-16">
-            Connecting Nigeria's brightest talent with premium professional opportunities. From AAUA to the World.
+            The high-performance platform connecting verified talent with premium professional opportunities. Designed in Nigeria for the global workforce.
           </p>
           <div className="flex flex-col sm:flex-row items-center gap-8 justify-center">
             <button 
@@ -71,63 +91,67 @@ const LandingPage: React.FC<LandingPageProps> = ({ onExplore, onPost }) => {
         </div>
       </section>
 
-      {/* 3. LOGO MARQUEE */}
+      {/* 3. LOGO MARQUEE (COMPANIES & UNIVERSITIES) */}
       <section className="py-24 bg-slate-50 dark:bg-slate-900 overflow-hidden border-y border-slate-100 dark:border-slate-800">
         <div className="mb-12 text-center">
-          <p className="text-[10px] font-black uppercase tracking-[0.4em] text-slate-400">Trusted By Entities & Institutions</p>
+          <p className="text-[10px] font-black uppercase tracking-[0.4em] text-slate-400">Trusted By Global Corporations & Institutions</p>
         </div>
-        <div className="flex whitespace-nowrap animate-marquee items-center gap-20">
-          {[...logos, ...logos].map((logo, i) => (
-            <div key={i} className="flex items-center gap-4 text-slate-400 grayscale hover:grayscale-0 transition-all">
+        <div className="flex whitespace-nowrap animate-marquee items-center gap-20 py-4">
+          {[...corporateLogos, ...universityLogos, ...corporateLogos, ...universityLogos].map((logo, i) => (
+            <div key={i} className="flex items-center gap-4 text-slate-400 grayscale hover:grayscale-0 transition-all opacity-70 hover:opacity-100 cursor-default">
               <div className="w-10 h-10">{logo.icon}</div>
-              <span className="text-2xl font-black tracking-tighter uppercase">{logo.name}</span>
+              <span className="text-2xl font-black tracking-tighter uppercase whitespace-nowrap">{logo.name}</span>
             </div>
           ))}
         </div>
       </section>
 
-      {/* 4. DUAL PATHWAY */}
+      {/* 4. DUAL VALUE PROPOSITION */}
       <section className="py-40">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-            <div className="p-16 bg-white dark:bg-slate-900 rounded-[60px] border border-slate-100 dark:border-slate-800 shadow-3xl animate-slide-left">
-              <Users className="w-16 h-16 text-indigo-600 mb-8" />
-              <h3 className="text-5xl font-black dark:text-white mb-6 tracking-tight">For Talent</h3>
-              <p className="text-xl text-slate-500 mb-10 leading-relaxed">Complete your profile, showcase your works, and network with other professionals to share ideas.</p>
-              <button onClick={onExplore} className="px-10 py-5 bg-indigo-600 text-white rounded-3xl font-black hover:bg-slate-900 transition-all">Find a Gig</button>
+            <div className="p-16 bg-white dark:bg-slate-900 rounded-[60px] border border-slate-100 dark:border-slate-800 shadow-3xl animate-slide-left group hover:bg-slate-50 dark:hover:bg-slate-800 transition-all duration-500">
+              <div className="w-20 h-20 bg-indigo-50 dark:bg-indigo-900/30 rounded-3xl flex items-center justify-center mb-10 group-hover:scale-110 transition-transform">
+                <Users className="w-10 h-10 text-indigo-600" />
+              </div>
+              <h3 className="text-5xl font-black dark:text-white mb-6 tracking-tight">For Employee</h3>
+              <p className="text-xl text-slate-500 dark:text-slate-400 mb-10 leading-relaxed font-medium">Complete your professional profile, showcase your works, follow peers at AAUA and beyond, and claim high-paying gigs.</p>
+              <button onClick={onExplore} className="px-12 py-5 bg-indigo-600 text-white rounded-3xl font-black text-lg hover:bg-slate-900 transition-all shadow-xl">Get Started</button>
             </div>
-            <div className="p-16 bg-slate-900 rounded-[60px] border border-slate-800 shadow-3xl animate-slide-right">
-              <Briefcase className="w-16 h-16 text-indigo-500 mb-8" />
-              <h3 className="text-5xl font-black text-white mb-6 tracking-tight">For Hirers</h3>
-              <p className="text-xl text-slate-400 mb-10 leading-relaxed">Access verified individual accounts and skills. Scout talent based on recent professional searches.</p>
-              <button onClick={onPost} className="px-10 py-5 bg-white text-slate-900 rounded-3xl font-black hover:bg-indigo-600 hover:text-white transition-all">Post Project</button>
+            
+            <div className="p-16 bg-slate-900 rounded-[60px] border border-slate-800 shadow-3xl animate-slide-right group hover:bg-slate-800 transition-all duration-500">
+              <div className="w-20 h-20 bg-white/5 rounded-3xl flex items-center justify-center mb-10 group-hover:scale-110 transition-transform">
+                <Briefcase className="w-10 h-10 text-indigo-500" />
+              </div>
+              <h3 className="text-5xl font-black text-white mb-6 tracking-tight">For Employer</h3>
+              <p className="text-xl text-slate-400 mb-10 leading-relaxed font-medium">Scout verified talents, browse professional portfolios, and post employment jobs. Access detailed skills from recent searches.</p>
+              <button onClick={onPost} className="px-12 py-5 bg-white text-slate-900 rounded-3xl font-black text-lg hover:bg-indigo-600 hover:text-white transition-all shadow-xl">Hire Talent</button>
             </div>
           </div>
         </div>
       </section>
 
-      {/* 5. ABOUT FOUNDER SECTION */}
-      <section className="py-40 bg-slate-50 dark:bg-slate-950 overflow-hidden">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center gap-20">
-          <div className="w-full md:w-1/2 relative animate-zoom-in">
-            <div className="aspect-[4/5] rounded-[60px] overflow-hidden border-[12px] border-white dark:border-slate-900 shadow-4xl">
-              <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&q=80&w=800" alt="Founder" className="w-full h-full object-cover grayscale" />
+      {/* 5. SUBTLE FOUNDER HOOK */}
+      <section className="py-40 bg-white dark:bg-slate-950">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="bg-slate-50 dark:bg-slate-900 rounded-[60px] p-16 flex flex-col md:flex-row items-center justify-between gap-12 border border-slate-100 dark:border-slate-800 group cursor-pointer hover:border-indigo-600/30 transition-all" onClick={() => window.location.hash = 'founder'}>
+            <div className="flex flex-col md:flex-row items-center gap-10">
+              <div className="relative">
+                <div className="w-32 h-32 rounded-[40px] overflow-hidden border-4 border-white dark:border-slate-800 shadow-2xl grayscale group-hover:grayscale-0 transition-all">
+                  <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Ayuba" alt="OBA" />
+                </div>
+                <div className="absolute -bottom-2 -right-2 bg-indigo-600 p-2 rounded-xl text-white shadow-xl">
+                  <Award className="w-5 h-5" />
+                </div>
+              </div>
+              <div className="text-center md:text-left">
+                <h4 className="text-3xl font-black dark:text-white tracking-tighter">OBA Vision</h4>
+                <p className="text-slate-500 dark:text-slate-400 font-bold uppercase tracking-[0.2em] text-[10px] mt-2">Connecting AAUA to the World</p>
+                <p className="text-slate-400 mt-4 max-w-md font-medium">"I built oGig to bridge the trust gap in the Nigerian service economy through clean financial logic and code."</p>
+              </div>
             </div>
-            <div className="absolute -bottom-10 -right-10 bg-indigo-600 p-8 rounded-[40px] text-white shadow-3xl animate-bounce-slow">
-              <School className="w-12 h-12 mb-2" />
-              <p className="text-xl font-black">AAUA Student</p>
-            </div>
-          </div>
-          <div className="w-full md:w-1/2 space-y-10 animate-fade-in">
-            <div className="inline-flex items-center gap-3 px-4 py-2 bg-indigo-100 dark:bg-indigo-900/30 text-indigo-600 dark:text-indigo-400 rounded-full font-black text-xs uppercase tracking-widest">
-              <Rocket className="w-4 h-4" /> The Visionary
-            </div>
-            <h2 className="text-6xl font-black dark:text-white leading-[0.9] tracking-tighter">Ayuba Boluwatife <br />Oluwapelumi <br /><span className="text-indigo-600">(OBA)</span></h2>
-            <p className="text-2xl text-slate-500 dark:text-slate-400 font-medium leading-relaxed italic">
-              "As a Finance student at Adekunle Ajasin University (AAUA), I built oGig to solve the trust gap in Nigeria's service economy."
-            </p>
-            <button onClick={() => window.location.hash = 'founder'} className="px-10 py-5 bg-slate-900 dark:bg-white dark:text-slate-950 text-white rounded-3xl font-black text-lg flex items-center gap-3 hover:scale-105 transition-all">
-              Founder Profile <ChevronRight className="w-6 h-6" />
+            <button className="p-6 bg-white dark:bg-slate-800 rounded-full shadow-xl group-hover:bg-indigo-600 group-hover:text-white transition-all">
+              <ChevronRight className="w-10 h-10" />
             </button>
           </div>
         </div>
